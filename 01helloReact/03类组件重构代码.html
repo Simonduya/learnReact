@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+    <script type="text/babel">
+        class App extends React.Component {
+            // 组件数据
+            constructor() {
+                super();
+                this.state = {
+                    msg: "Hello World",
+                };
+            }
+            // 组件方法
+            btnClick() {
+                // console.log('btnClick', this);
+                this.setState({
+                    msg: "Hello react",
+                });
+            }
+            // 渲染内容
+            render() {
+                return (
+                    <div>
+                        <h2>{this.state.msg}</h2>
+                        <button onClick={this.btnClick.bind(this)}>修改文本</button>
+                    </div>
+                );
+            }
+        }
+        // ES6中的类是严格模式, 默认绑定undefined
+        // const app = new App();
+        // // app.btnClick();
+        // const bar = app.btnClick;
+        // bar();
+        // 经过babel转化后会默认开启严格模式, 这时候默认绑定的this是undefined
+        //   function foo() {
+        //     console.log(this)
+        //   }
+        //   foo();
+        window.onload = function () {
+            const root = ReactDOM.createRoot(document.querySelector("#app"));
+            root.render(<App />);
+        }
+    </script>
+</body>
+
+</html>
